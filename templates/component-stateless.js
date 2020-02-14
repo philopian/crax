@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import styles from "./styles.styl";
+import styles from "./styles.___styles___";
 
 const ___titleCase___ = ({ message }) => (
   <div className={`${styles.helloText}`}>

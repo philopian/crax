@@ -25,7 +25,7 @@ const promptQuestions = [
     name: "styles",
     message: "What style types do you want to use?",
     default: "src/components",
-    choices: ["css", "sass", "styl"]
+    choices: ["css", "scss", "styl"]
   },
   {
     type: "confirm",
@@ -74,7 +74,7 @@ const init = () => {
     const DIR = path.join(process.cwd(), componentDir);
     if (!fs.existsSync(DIR)) fs.mkdirSync(DIR, { recursive: true });
 
-    // TODO: if use selects SASS `$ npm i node-sass`
+    // TODO: if use selects scss `$ npm i node-sass`
 
     if (storybook) {
       // Install storybook
@@ -90,7 +90,8 @@ const init = () => {
         succeedSpinner();
 
         startSpinner("Configuring Storybook Addons", "");
-        const storybookAddons = `npm i -D @storybook/addon-a11y @storybook/addon-actions @storybook/addon-knobs @storybook/addon-docs prop-types`;
+        const installNodeSass = styles === "scss" ? "node-sass" : ""; // Install node-sass if user chooses sass styles
+        const storybookAddons = `npm i -D @storybook/addon-a11y @storybook/addon-actions @storybook/addon-knobs @storybook/addon-docs prop-types ${installNodeSass}`;
         exec(storybookAddons, error => {
           if (error) {
             console.log(error.stack);

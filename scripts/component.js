@@ -68,7 +68,7 @@ const createNewComponent = () => {
         enzyme: "enzyme.test.js",
         enzymeSnapshots: "enzyme-snapshots.test.js",
         css: "styles.css",
-        sass: "styles.sass",
+        scss: "styles.scss",
         stylus: "styles.styl",
         readme: "readme.md",
         storybook: "storybook.stories.js"
@@ -108,8 +108,8 @@ const createNewComponent = () => {
         case "css":
           makeTemplateFile(files.styles, templates.css, newDir, componentName);
           break;
-        case "sass":
-          makeTemplateFile(files.styles, templates.sass, newDir, componentName);
+        case "scss":
+          makeTemplateFile(files.styles, templates.scss, newDir, componentName);
           break;
         case "styl":
           makeTemplateFile(files.styles, templates.stylus, newDir, componentName);
