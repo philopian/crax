@@ -1,6 +1,19 @@
+const ora = require("ora");
+const chalk = require("chalk");
+
 // Spinner config
 const spinner = ora("Loading unicorns");
 spinner.color = "cyan"; // ('black' 'red' 'green' 'yellow' 'blue' 'magenta' 'cyan' 'white' 'gray')
-spinner.text = "Loading rainbows\n";
 
-const startSpinner = () => spinner.start();
+const startSpinner = (type, message) => {
+  spinner.text = chalk.bgCyan(` ${type} `) + message;
+  spinner.start();
+};
+const stopSpinner = () => spinner.stop();
+const succeedSpinner = () => spinner.succeed();
+
+module.exports = {
+  startSpinner,
+  stopSpinner,
+  succeedSpinner
+};
