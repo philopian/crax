@@ -23,7 +23,7 @@ const promptQuestions = [
     name: "styles",
     message: "What style types do you want to use?",
     default: "src/components",
-    choices: ["css", "Sass", "Stylus"]
+    choices: ["css", "sass", "styl"]
   }
   // TODO: question if user want to use storybook
   // {

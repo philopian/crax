@@ -4,6 +4,7 @@
 
 const chalk = require("chalk");
 const init = require("../scripts/init");
+const component = require("../scripts/component");
 
 // Delegate the commands to run
 const args = process.argv.slice(2);
@@ -13,13 +14,12 @@ const scriptIndex = args.findIndex(
 const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
 switch (script) {
   case "init":
-    // TODO
-    console.log("..init...");
     init();
     break;
   case "component":
     // TODO
     console.log("..component...");
+    component();
     break;
   case "eslint":
     // TODO

@@ -28,10 +28,7 @@ const writeFile = (fileName, filePath, fileContents) => {
 
 const replaceNames = (fileContents, fileNames) => {
   Object.keys(fileNames).map(key => {
-    fileContents = fileContents.replace(
-      new RegExp(`___${key}___`, "g"),
-      fileNames[key]
-    );
+    fileContents = fileContents.replace(new RegExp(`___${key}___`, "g"), fileNames[key]);
   });
   return fileContents;
 };
@@ -45,10 +42,7 @@ const appendToFile = (fileName, filePath, newContent) => {
 
 const makeTemplateFile = (fileName, templateName, dir, componentName) => {
   const filePath = path.join(dir, fileName);
-  const fileContents = fs.readFileSync(
-    path.join(__dirname, `./templates/${templateName}`),
-    "utf8"
-  );
+  const fileContents = fs.readFileSync(path.join(__dirname, `../templates/${templateName}`), "utf8");
   const fileContentsWithVars = replaceNames(fileContents, componentName);
   writeFile(fileName, filePath, fileContentsWithVars);
 };
@@ -56,11 +50,10 @@ const makeTemplateFile = (fileName, templateName, dir, componentName) => {
 const readRxrcFile = () => {
   const rc = `${process.cwd()}/.rxrc`;
   if (fs.existsSync(rc)) {
-    return fs.readFileSync(rc, "utf8");
+    return JSON.parse(fs.readFileSync(rc, "utf8"));
   }
 
-  // TODO: create an .rxrc file
-  console.log("NO... .rxrc file, CREATE ONE");
+  // Create an .rxrc file
   return false;
 };
 
