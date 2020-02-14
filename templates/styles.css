@@ -1,0 +1,11 @@
+.helloText{
+  border: solid 3px;
+  font-size: 14px;
+  padding: 10px;
+  font-family: 'Helvetica';
+  border-radius: 10px;
+}
+
+p{
+  color: blue;
+}
