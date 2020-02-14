@@ -27,7 +27,6 @@ const promptQuestions = [
     default: "src/components",
     choices: ["css", "sass", "styl"]
   },
-  // TODO: question if user want to use storybook
   {
     type: "confirm",
     name: "storybook",
@@ -35,6 +34,23 @@ const promptQuestions = [
     default: true
   }
 ];
+
+const updateStoryConfigAddons = () => {
+  const mainStorybook = path.join(process.cwd(), ".storybook/main.js");
+  fs.readFile(mainStorybook, "utf8", (err, data) => {
+    if (err) {
+      return console.log(err);
+    }
+    var result = data.replace(
+      "addons: [",
+      `addons: [
+    "@storybook/addon-knobs",
+    "@storybook/addon-a11y/register",
+    "@storybook/addon-docs",`
+    );
+    fs.writeFileSync(mainStorybook, result, "utf8");
+  });
+};
 
 const init = () => {
   // Read the .rxrc file to get the path for the new components
@@ -58,8 +74,9 @@ const init = () => {
     const DIR = path.join(process.cwd(), componentDir);
     if (!fs.existsSync(DIR)) fs.mkdirSync(DIR, { recursive: true });
 
+    // TODO: if use selects SASS `$ npm i node-sass`
+
     if (storybook) {
-      // =====================================================================================
       // Install storybook
       startSpinner("Configuring Storybook", "");
 
@@ -81,35 +98,13 @@ const init = () => {
             console.log("Signal received: " + error.signal);
           }
           succeedSpinner();
+
+          // Add additional Addons to the storybook config
+          updateStoryConfigAddons();
         });
       });
-
-      // =====================================================================================
     }
   });
 };
-
-// const ss = () => {
-//   // TODO: Add some scripts to your package.json
-//   const ROOT_DIR = path.join(process.cwd());
-//   const packageJsonPath = path.join(ROOT_DIR, "package.json");
-//   console.log(packageJsonPath);
-
-//   // fs.readFileSync();
-//   // TODO: Configure Storybook
-//   const dotStorybook = path.join(ROOT_DIR, ".storybook");
-//   if (!fs.existsSync(dotStorybook)) {
-//     fs.mkdirSync(dotStorybook);
-
-//     // TODO: copy storybook files
-//     const storybookTemplateDir = path.join(__dirname, "../templates/storybook");
-
-//     console.log(path.join(storybookTemplateDir, "addons.js"), path.join(dotStorybook, "addons.js"));
-//     fs.copySync(path.join(storybookTemplateDir, "addons.js"), path.join(dotStorybook, "addons.js"));
-//     fs.copySync(path.join(storybookTemplateDir, "config.js"), path.join(dotStorybook, "config.js"));
-//     fs.copySync(path.join(storybookTemplateDir, "presets.js"), path.join(dotStorybook, "presets.js"));
-//     fs.copySync(path.join(storybookTemplateDir, "webpack.config.js"), path.join(dotStorybook, "webpack.config.js"));
-//   }
-// };
 
 module.exports = init;
