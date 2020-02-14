@@ -39,7 +39,7 @@ const createNewComponent = () => {
 
   if (!componentDir) log(chalk.bgRed(" Error ") + ` There's no .rxrc file present`);
 
-  // TODO: ask questions about a new component
+  // Ask questions about a new component
   inquirer.prompt(promptQuestions).then(answers => {
     answers.componentName = multiCaseInput(answers.componentName);
     const { componentType, componentName, componentTest } = answers;
@@ -77,13 +77,13 @@ const createNewComponent = () => {
       // Component type
       switch (componentType) {
         case "Class based component":
-          makeTemplateFile(files.component, templates.class, newDir, componentName);
+          makeTemplateFile(files.component, templates.class, newDir, { ...componentName, styles });
           break;
         case "Stateless component":
-          makeTemplateFile(files.component, templates.stateless, newDir, componentName);
+          makeTemplateFile(files.component, templates.stateless, newDir, { ...componentName, styles });
           break;
         default:
-          makeTemplateFile(files.component, templates.class, newDir, componentName);
+          makeTemplateFile(files.component, templates.class, newDir, { ...componentName, styles });
           break;
       }
 

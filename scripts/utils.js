@@ -27,9 +27,9 @@ const writeFile = (fileName, filePath, fileContents) => {
 };
 
 const replaceNames = (fileContents, fileNames) => {
-  Object.keys(fileNames).map(key => {
-    fileContents = fileContents.replace(new RegExp(`___${key}___`, "g"), fileNames[key]);
-  });
+  Object.keys(fileNames).map(
+    key => (fileContents = fileContents.replace(new RegExp(`___${key}___`, "g"), fileNames[key]))
+  );
   return fileContents;
 };
 
