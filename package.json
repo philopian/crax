@@ -1,0 +1,22 @@
+{
+  "name": "react-xtras",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "rx": "bin/react-xtras.js"
+  },
+  "scripts": {
+    "start": "node bin/react-xtras.js",
+    "dev": "nodemon bin/react-xtras.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "fs-extra": "^8.1.0",
+    "inquirer": "^7.0.4",
+    "lodash": "^4.17.15"
+  }
+}
