@@ -35,21 +35,38 @@ const promptQuestions = [
   }
 ];
 
-const updateStoryConfigAddons = () => {
-  const mainStorybook = path.join(process.cwd(), ".storybook/main.js");
-  fs.readFile(mainStorybook, "utf8", (err, data) => {
-    if (err) {
-      return console.log(err);
-    }
-    var result = data.replace(
-      "addons: [",
-      `addons: [
-    "@storybook/addon-knobs",
-    "@storybook/addon-a11y/register",
-    "@storybook/addon-docs",`
-    );
-    fs.writeFileSync(mainStorybook, result, "utf8");
-  });
+const updateStoryConfigAddons = useScss => {
+  const mainStorybookPath = path.join(process.cwd(), ".storybook/main.js");
+  const data = require(mainStorybookPath);
+
+  // Add more storybook addons
+  data.addons = [...data.addons, "@storybook/addon-knobs", "@storybook/addon-a11y/register", "@storybook/addon-docs"];
+
+  // Add the webpack config
+  data.webpackFinal = "";
+
+  let mainStorybook = JSON.stringify(data, null, 1);
+  const usingScss = `{
+    test: /\.scss$/,
+    use: ['style-loader', 'css-loader', 'sass-loader'],
+    include: path.resolve(__dirname, '../'),
+  }`;
+  mainStorybook = mainStorybook.replace(
+    `"webpackFinal": ""`,
+    `webpackFinal: async (config, { configType }) => {
+    console.log(configType)
+
+    // Make whatever fine-grained changes you need
+    config.module.rules.push(${useScss ? usingScss : null});
+
+    // Return the altered config
+    return config;
+  },`
+  );
+  mainStorybook = `const path = require("path");
+
+module.exports = ${mainStorybook}`;
+  fs.writeFileSync(mainStorybookPath, mainStorybook, "utf8");
 };
 
 const init = () => {
@@ -74,34 +91,25 @@ const init = () => {
     const DIR = path.join(process.cwd(), componentDir);
     if (!fs.existsSync(DIR)) fs.mkdirSync(DIR, { recursive: true });
 
-    // TODO: if use selects scss `$ npm i node-sass`
-
     if (storybook) {
       // Install storybook
       startSpinner("Configuring Storybook", "");
 
       const cmd = `npx -p @storybook/cli sb init --type react_scripts`;
       exec(cmd, error => {
-        if (error) {
-          console.log(error.stack);
-          console.log("Error code: " + error.code);
-          console.log("Signal received: " + error.signal);
-        }
+        if (error) console.log(error);
         succeedSpinner();
 
         startSpinner("Configuring Storybook Addons", "");
         const installNodeSass = styles === "scss" ? "node-sass" : ""; // Install node-sass if user chooses sass styles
         const storybookAddons = `npm i -D @storybook/addon-a11y @storybook/addon-actions @storybook/addon-knobs @storybook/addon-docs prop-types ${installNodeSass}`;
         exec(storybookAddons, error => {
-          if (error) {
-            console.log(error.stack);
-            console.log("Error code: " + error.code);
-            console.log("Signal received: " + error.signal);
-          }
+          if (error) console.log(error);
+
           succeedSpinner();
 
           // Add additional Addons to the storybook config
-          updateStoryConfigAddons();
+          updateStoryConfigAddons(styles === "scss");
         });
       });
     }
