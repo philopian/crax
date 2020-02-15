@@ -35,37 +35,15 @@ const promptQuestions = [
   }
 ];
 
-const updateStoryConfigAddons = useScss => {
+const updateStoryConfigAddons = () => {
   const mainStorybookPath = path.join(process.cwd(), ".storybook/main.js");
   const data = require(mainStorybookPath);
 
   // Add more storybook addons
   data.addons = [...data.addons, "@storybook/addon-knobs", "@storybook/addon-a11y/register", "@storybook/addon-docs"];
 
-  // Add the webpack config
-  data.webpackFinal = "";
-
   let mainStorybook = JSON.stringify(data, null, 1);
-  const usingScss = `{
-    test: /\.scss$/,
-    use: ['style-loader', 'css-loader', 'sass-loader'],
-    include: path.resolve(__dirname, '../'),
-  }`;
-  mainStorybook = mainStorybook.replace(
-    `"webpackFinal": ""`,
-    `webpackFinal: async (config, { configType }) => {
-    console.log(configType)
-
-    // Make whatever fine-grained changes you need
-    config.module.rules.push(${useScss ? usingScss : null});
-
-    // Return the altered config
-    return config;
-  },`
-  );
-  mainStorybook = `const path = require("path");
-
-module.exports = ${mainStorybook}`;
+  mainStorybook = `module.exports = ${mainStorybook}`;
   fs.writeFileSync(mainStorybookPath, mainStorybook, "utf8");
 };
 
@@ -109,7 +87,7 @@ const init = () => {
           succeedSpinner();
 
           // Add additional Addons to the storybook config
-          updateStoryConfigAddons(styles === "scss");
+          updateStoryConfigAddons();
         });
       });
     }
