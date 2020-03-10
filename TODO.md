@@ -1,5 +1,3 @@
-# CRAX
-- Create React App Xtras
 
 # Todos
 - [x] init 
