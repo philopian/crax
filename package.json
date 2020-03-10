@@ -10,7 +10,9 @@
     "start": "node bin/crax.js",
     "dev": "nodemon bin/crax.js"
   },
-  "keywords": [],
+  "keywords": [
+    "Create React App Xtras", "create-react-app xtras", "Create React App Extras", "create-react-app extras"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
