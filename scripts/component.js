@@ -19,11 +19,7 @@ const promptQuestions = [
     type: "list",
     name: "componentType",
     message: "What type of component do you want?",
-    choices: [
-      "Class based component",
-      "Stateless component"
-      // TODO: "Hooks"
-    ]
+    choices: ["Hooks component", "Class based component", "Stateless component"]
   },
   {
     type: "list",
@@ -62,6 +58,7 @@ const createNewComponent = () => {
       };
 
       const templates = {
+        hooks: "component-hooks.js",
         class: "component-class.js",
         stateless: "component-stateless.js",
         reactTestingLibrary: "react-testing-library.test.js",
@@ -76,6 +73,9 @@ const createNewComponent = () => {
 
       // Component type
       switch (componentType) {
+        case "Hooks component":
+          makeTemplateFile(files.component, templates.hooks, newDir, { ...componentName, styles });
+          break;
         case "Class based component":
           makeTemplateFile(files.component, templates.class, newDir, { ...componentName, styles });
           break;

@@ -8,17 +8,13 @@ const component = require("../scripts/component");
 
 // Delegate the commands to run
 const args = process.argv.slice(2);
-const scriptIndex = args.findIndex(
-  x => x === "component" || x === "eslint" || x === "storybook" || x === "help"
-);
+const scriptIndex = args.findIndex(x => x === "component" || x === "eslint" || x === "storybook" || x === "help");
 const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
 switch (script) {
   case "init":
     init();
     break;
   case "component":
-    // TODO
-    console.log("..component...");
     component();
     break;
   case "eslint":
@@ -35,10 +31,7 @@ switch (script) {
     break;
   }
   default:
-    console.log(
-      chalk.whiteBright.bgRed(" Unknown command: "),
-      `react-xtras ${script}`
-    );
+    console.log(chalk.whiteBright.bgRed(" Unknown command: "), `react-xtras ${script}`);
     break;
 }
 //===============================================================================================================
