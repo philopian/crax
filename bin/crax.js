@@ -8,9 +8,7 @@ const component = require("../scripts/component");
 
 // Delegate the commands to run
 const args = process.argv.slice(2);
-const scriptIndex = args.findIndex(
-  x => x === "component" || x === "eslint" || x === "storybook" || x === "help"
-);
+const scriptIndex = args.findIndex(x => x === "component" || x === "eslint" || x === "storybook" || x === "help");
 const script = scriptIndex === -1 ? args[0] : args[scriptIndex];
 switch (script) {
   case "init":
@@ -20,23 +18,20 @@ switch (script) {
     component();
     break;
   case "eslint":
-    // TODO
+    // TODO: Add ESLint + prettier
     console.log("..eslint...");
     break;
   case "storybook":
-    // TODO
+    // TODO: Add storybook after the fact
     console.log("..storybook...");
     break;
   case "help": {
-    // TODO
+    // TODO: Add some CLI help
     console.log("..help...");
     break;
   }
   default:
-    console.log(
-      chalk.whiteBright.bgRed(" Unknown command: "),
-      `crax ${script}`
-    );
+    console.log(chalk.whiteBright.bgRed(" Unknown command: "), `crax ${script}`);
     break;
 }
 //===============================================================================================================

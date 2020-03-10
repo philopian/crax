@@ -12,13 +12,18 @@
 - [] add tests
 
 
-#
-
+# Using CRAX
 ```
 $ npx create-react-app my-app
 $ npm i -D crax
+$ crax init
 ```
-cra-xtras
+- Package.json script
+```json
+  "scripts": {
+    "new:component": "crax component"
+  },
+```
 
 
 # Dev Notes
