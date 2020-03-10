@@ -25,7 +25,7 @@ cra-xtras
 # Dev Notes
 - link this repo locally
   ```
-  $ cd /Users/philopian/Development/crax/crax
+  $ cd crax
   $ npm link
   $ npm list -g --depth 0
   ```
