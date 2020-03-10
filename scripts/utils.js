@@ -47,13 +47,13 @@ const makeTemplateFile = (fileName, templateName, dir, componentName) => {
   writeFile(fileName, filePath, fileContentsWithVars);
 };
 
-const readRxrcFile = () => {
-  const rc = `${process.cwd()}/.rxrc`;
+const readCraxFile = () => {
+  const rc = `${process.cwd()}/.crax`;
   if (fs.existsSync(rc)) {
     return JSON.parse(fs.readFileSync(rc, "utf8"));
   }
 
-  // Create an .rxrc file
+  // Create an .crax file
   return false;
 };
 
@@ -63,5 +63,5 @@ module.exports = {
   replaceNames,
   appendToFile,
   makeTemplateFile,
-  readRxrcFile
+  readCraxFile
 };

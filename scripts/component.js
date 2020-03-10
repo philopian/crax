@@ -5,7 +5,7 @@ const inquirer = require("inquirer");
 const _ = require("lodash");
 const { log } = console;
 
-const { multiCaseInput, appendToFile, makeTemplateFile, readRxrcFile } = require("./utils");
+const { multiCaseInput, appendToFile, makeTemplateFile, readCraxFile } = require("./utils");
 
 // Ask questions
 // Prompt types: [list, rawlist, expand, checkbox, confirm, input, password, editor]
@@ -30,10 +30,10 @@ const promptQuestions = [
 ];
 
 const createNewComponent = () => {
-  // Read the .rxrc file to get the path for the new components
-  const { componentDir, styles, storybook } = readRxrcFile();
+  // Read the .crax file to get the path for the new components
+  const { componentDir, styles, storybook } = readCraxFile();
 
-  if (!componentDir) log(chalk.bgRed(" Error ") + ` There's no .rxrc file present`);
+  if (!componentDir) log(chalk.bgRed(" Error ") + ` There's no .crax file present`);
 
   // Ask questions about a new component
   inquirer.prompt(promptQuestions).then(answers => {
@@ -74,16 +74,28 @@ const createNewComponent = () => {
       // Component type
       switch (componentType) {
         case "Hooks component":
-          makeTemplateFile(files.component, templates.hooks, newDir, { ...componentName, styles });
+          makeTemplateFile(files.component, templates.hooks, newDir, {
+            ...componentName,
+            styles
+          });
           break;
         case "Class based component":
-          makeTemplateFile(files.component, templates.class, newDir, { ...componentName, styles });
+          makeTemplateFile(files.component, templates.class, newDir, {
+            ...componentName,
+            styles
+          });
           break;
         case "Stateless component":
-          makeTemplateFile(files.component, templates.stateless, newDir, { ...componentName, styles });
+          makeTemplateFile(files.component, templates.stateless, newDir, {
+            ...componentName,
+            styles
+          });
           break;
         default:
-          makeTemplateFile(files.component, templates.class, newDir, { ...componentName, styles });
+          makeTemplateFile(files.component, templates.class, newDir, {
+            ...componentName,
+            styles
+          });
           break;
       }
 

@@ -1,18 +1,37 @@
-# React Xtras
-- Create a spinner class or start/stop
-- Each script has everything it needs
+# CRAX
+- Create React App Xtras
+
+# Todos
+- [x] init 
+- [x] new component
+  - [x] hooks
+  - [x] class
+  - [x] function
+  - [] better styles options (css/scss/stylus) examples
+- [] eslint
+- [] storybook after the fact
+- [] help
 
 
-
-
-
-
+#
 
 ```
-cd /Users/philopian/Development/react-xtras/react-xtras
-npm link
-npmg
-
-cd /Users/philopian/Development/react-xtras/linked-app
-npm link react-xtras
+$ npx create-react-app linked-2
+$ npm i -D crax
 ```
+cra-xtras
+
+
+# Dev Notes
+- link this repo locally
+  ```
+  $ cd /Users/philopian/Development/crax/crax
+  $ npm link
+  $ npm list -g --depth 0
+  ```
+
+- Use this linked repo locally
+  ```
+  $ cd my-app
+  $ npm link crax
+  ```

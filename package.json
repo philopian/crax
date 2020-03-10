@@ -1,14 +1,14 @@
 {
-  "name": "react-xtras",
+  "name": "crax",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "bin": {
-    "rx": "bin/react-xtras.js"
+    "crax": "bin/crax.js"
   },
   "scripts": {
-    "start": "node bin/react-xtras.js",
-    "dev": "nodemon bin/react-xtras.js"
+    "start": "node bin/crax.js",
+    "dev": "nodemon bin/crax.js"
   },
   "keywords": [],
   "author": "",

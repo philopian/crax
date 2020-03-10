@@ -7,7 +7,7 @@ const { exec } = require("child_process");
 
 const { log } = console;
 
-const { readRxrcFile } = require("./utils");
+const { readCraxFile } = require("./utils");
 const { startSpinner, stopSpinner, succeedSpinner } = require("./spinner");
 
 // Ask questions
@@ -48,12 +48,12 @@ const updateStoryConfigAddons = () => {
 };
 
 const init = () => {
-  // Read the .rxrc file to get the path for the new components
-  const rxrcContents = readRxrcFile();
+  // Read the .crax file to get the path for the new components
+  const craxContents = readCraxFile();
 
-  // Inform the user that there's already a .rxrc file present
-  if (rxrcContents) {
-    log(chalk.bgRed(" File exist ") + ` There's already a .rxrc file present`);
+  // Inform the user that there's already a .crax file present
+  if (craxContents) {
+    log(chalk.bgRed(" File exist ") + ` There's already a .crax file present`);
     return;
   }
 
@@ -61,9 +61,9 @@ const init = () => {
   inquirer.prompt(promptQuestions).then(answers => {
     const { componentDir, styles, storybook } = answers;
 
-    // Create rxrc file with the component dir path
-    const rxrcPath = `${process.cwd()}/.rxrc`;
-    fs.writeFileSync(rxrcPath, JSON.stringify({ componentDir, styles, storybook }, null, 1), "utf-8");
+    // Create crax file with the component dir path
+    const cfraxPath = `${process.cwd()}/.crax`;
+    fs.writeFileSync(cfraxPath, JSON.stringify({ componentDir, styles, storybook }, null, 1), "utf-8");
 
     // Create the component dir if it doesn't already exist
     const DIR = path.join(process.cwd(), componentDir);
@@ -78,7 +78,7 @@ const init = () => {
         if (error) console.log(error);
         succeedSpinner();
 
-        startSpinner("Configuring Storybook Addons", "");
+        startSpinner("Configure Storybook Addons", "");
         const installNodeSass = styles === "scss" ? "node-sass" : ""; // Install node-sass if user chooses sass styles
         const storybookAddons = `npm i -D @storybook/addon-a11y @storybook/addon-actions @storybook/addon-knobs @storybook/addon-docs prop-types ${installNodeSass}`;
         exec(storybookAddons, error => {
