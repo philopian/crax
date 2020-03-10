@@ -16,7 +16,7 @@
 #
 
 ```
-$ npx create-react-app linked-2
+$ npx create-react-app my-app
 $ npm i -D crax
 ```
 cra-xtras
