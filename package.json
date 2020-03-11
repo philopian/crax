@@ -1,6 +1,6 @@
 {
   "name": "crax",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -11,7 +11,10 @@
     "dev": "nodemon bin/crax.js"
   },
   "keywords": [
-    "Create React App Xtras", "create-react-app xtras", "Create React App Extras", "create-react-app extras"
+    "Create React App Xtras",
+    "create-react-app xtras",
+    "Create React App Extras",
+    "create-react-app extras"
   ],
   "author": "",
   "license": "ISC",
