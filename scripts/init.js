@@ -78,10 +78,10 @@ const init = () => {
         if (error) console.log(error);
         succeedSpinner();
 
-        startSpinner("Configure Storybook Addons", "");
+        startSpinner("Configure", " Storybook Addons");
         const installNodeSass = styles === "scss" ? "node-sass" : ""; // Install node-sass if user chooses sass styles
-        const storybookAddons = `npm i -D @storybook/addon-a11y @storybook/addon-actions @storybook/addon-knobs @storybook/addon-docs prop-types ${installNodeSass}`;
-        exec(storybookAddons, error => {
+        const npmCmd = `npm i -D @storybook/addon-a11y @storybook/addon-actions @storybook/addon-knobs @storybook/addon-docs prop-types ${installNodeSass}`;
+        exec(npmCmd, error => {
           if (error) console.log(error);
 
           succeedSpinner();
@@ -89,6 +89,13 @@ const init = () => {
           // Add additional Addons to the storybook config
           updateStoryConfigAddons();
         });
+      });
+    } else if (styles === "scss") {
+      startSpinner("Configure", " node-sass");
+      const npmCmd = `npm i -D prop-types node-sass`;
+      exec(npmCmd, error => {
+        if (error) console.log(error);
+        succeedSpinner();
       });
     }
   });
