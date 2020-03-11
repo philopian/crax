@@ -9,6 +9,8 @@
   $ npm i -D crax
   $ crax init
   ```
+  - This will creat a `.crax` file in the root of your application
+  
 - Package.json script
   ```json
     "scripts": {
