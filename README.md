@@ -1,4 +1,4 @@
-![CRAX](logo.png)
+![CRAX](https://raw.githubusercontent.com/philopian/crax/master/logo.png)
 - Create React App Xtras
 
 
@@ -10,7 +10,7 @@
   $ crax init
   ```
   - This will creat a `.crax` file in the root of your application
-  
+
 - Package.json script
   ```json
     "scripts": {
