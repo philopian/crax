@@ -1,6 +1,6 @@
 /* globals describe, test, afterEach, expect */
 import React from "react";
-import { cleanup, render } from "react-testing-library";
+import { cleanup, render } from "@testing-library/react";
 
 import ___titleCase___ from "./___titleCase___.js";
 

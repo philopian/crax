@@ -71,7 +71,7 @@ const init = () => {
 
     if (storybook) {
       // Install storybook
-      startSpinner("Configuring Storybook", "");
+      startSpinner("Configure Storybook", "");
 
       const cmd = `npx -p @storybook/cli sb init --type react_scripts`;
       exec(cmd, error => {
